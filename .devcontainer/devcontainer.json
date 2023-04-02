@@ -1,0 +1,49 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/javascript-node-postgres
+// Update the VARIANT arg in docker-compose.yml to pick a Node.js version
+{
+	"name": "Scorched Movies Frontend",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick a Node version: 18, 16, 14.
+		// Append -bullseye or -buster to pin to an OS version.
+		// Use -bullseye variants on local on arm64/Apple Silicon.
+		"args": {
+			"VARIANT": "18-bullseye"
+		}
+	},
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"settings": {
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"npm.packageManager": "yarn",
+				"sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64",
+				"sonarlint.connectedMode.project": {
+					"projectKey": "devops-sre-platform-frontend"
+				}
+			},
+			"extensions": [
+				"eamodio.gitlens",
+				"SonarSource.sonarlint-vscode",
+				"streetsidesoftware.code-spell-checker",
+				"streetsidesoftware.code-spell-checker-portuguese-brazilian",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"pkief.material-icon-theme",
+				"angular.ng-template"
+			]
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or with the host.
+	"forwardPorts": [
+		4200
+	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "yarn install",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
+}

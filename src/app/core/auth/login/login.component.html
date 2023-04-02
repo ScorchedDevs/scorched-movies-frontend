@@ -1,0 +1,26 @@
+<div id="login-box" fxFlex="70" fxLayoutAlign="center center">
+  <form [formGroup]="loginForm">
+    <div id="login-form">
+      <mat-form-field>
+        <input matInput placeholder="User" formControlName="username" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          formControlName="password"
+          type="password"
+        />
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!loginForm.valid"
+      (click)="onSubmit()"
+    >
+      Entrar
+    </button>
+  </form>
+</div>
