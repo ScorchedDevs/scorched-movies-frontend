@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { JWTToken, LoginInput } from '../models/auth.model';
+import {
+  JWTToken,
+  LoginInput,
+  RecoverInput,
+  RegisterInput,
+} from '../models/auth.model';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { MessageOutput } from '../models/message.model';
+import { ToastService } from '../toast/toast.service';
+import iziToast from 'izitoast';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +23,8 @@ export class AuthService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly toastService: ToastService
   ) {}
 
   get currentUserValue(): JWTToken | null {
@@ -40,9 +49,72 @@ export class AuthService {
       );
   }
 
+  register(registerInput: RegisterInput) {
+    delete registerInput.passwordConfirmation;
+    return this.http
+      .post<MessageOutput>(
+        `${environment.backendUrl}/auth/signUp`,
+        registerInput
+      )
+      .pipe(
+        tap((response) => {
+          this.toast(response);
+        })
+      );
+  }
+
+  confirmEmail(confirmationToken: string) {
+    return this.http
+      .post<MessageOutput>(`${environment.backendUrl}/auth/confirmEmail`, {
+        confirmationToken,
+      })
+      .pipe(
+        tap((response) => {
+          this.toast(response);
+        })
+      );
+  }
+
+  sendRecoverPasswordMail({ email }: { email: string }) {
+    return this.http
+      .post<MessageOutput>(
+        `${environment.backendUrl}/auth/sendRecoverPasswordMail`,
+        {
+          email,
+        }
+      )
+      .pipe(
+        tap((response) => {
+          this.toast(response);
+        })
+      );
+  }
+
+  recoverPassword(recoverInput: RecoverInput) {
+    delete recoverInput.passwordConfirmation;
+    return this.http
+      .post<MessageOutput>(
+        `${environment.backendUrl}/auth/recoverPassword`,
+        recoverInput
+      )
+      .pipe(
+        tap((response) => {
+          this.toast(response);
+        })
+      );
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
+  }
+
+  toast({ message, success }: MessageOutput) {
+    if (success) {
+      this.toastService.success(message);
+    } else {
+      this.toastService.error(message);
+    }
   }
 }

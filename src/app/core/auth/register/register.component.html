@@ -1,0 +1,52 @@
+<div id="register-box">
+  <div fxFlex fxLayoutAlign="center center">
+    <mat-card fxFlex="30" fxLayoutAlign="center start"
+      ><form fxLayout="column" [formGroup]="registerForm">
+        <div id="tegister-form" fxFlex="100" fxLayout="row wrap">
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Email" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Full name" formControlName="name" />
+          </mat-form-field>
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Username" formControlName="username" />
+          </mat-form-field>
+          <mat-form-field fxFlex="100">
+            <input
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              type="password"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="100">
+            <input
+              matInput
+              placeholder="Confirm password"
+              formControlName="passwordConfirmation"
+              type="password"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          [disabled]="!registerForm.valid"
+          (click)="onSubmit()"
+        >
+          Register
+        </button>
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          (click)="onLogin()"
+        >
+          Already have an account
+        </button>
+      </form></mat-card
+    >
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div fxLayout="column">
+  <div id="search-container" fxFlex fxLayout="row">
+    <mat-icon id="icon" fxFlex="6">search</mat-icon>
+    <mat-form-field fxFlex="94" id="search-bar">
+      <input
+        type="tel"
+        matInput
+        placeholder="Search"
+        (input)="onSearchChange($event)"
+      />
+    </mat-form-field>
+  </div>
+
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly center"
+    fxLayout.xs="column"
+    fxFlexFill
+    id="container"
+  >
+    <div
+      *ngFor="let movie of moviesList"
+      class="movie-container"
+      fxLayout="center center"
+      fxFlex="10"
+      fxFlexFill
+    >
+      <mat-card (click)="openDialog(movie)">
+        <mat-card-content fxLayout="column" fxFlexFill
+          ><img mat-card-image [src]="movie.medium_cover_image" />
+          <mat-card-subtitle fxLaoyout="row warp">{{
+            movie.title
+          }}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <mat-paginator
+    id="paginator"
+    [length]="this.pageLength"
+    [pageSize]="18"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+  ></mat-paginator>
+</div>

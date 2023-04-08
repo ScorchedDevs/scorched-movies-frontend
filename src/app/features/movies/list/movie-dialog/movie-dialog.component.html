@@ -1,0 +1,27 @@
+<div fxFlexFill fxLayout="row">
+  <div
+    id="image-title-container"
+    fxFlex="30"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <img id="movie-image" [src]="this.image" alt="" />
+    <span id="title">{{ this.title }}</span>
+  </div>
+  <div fxFlex="70" fxLayout="column">
+    <div id="summary" class="overflow-y-scroll">
+      <span>{{ this.description }}</span>
+    </div>
+    <div id="button-container" fxLayout="row" fxLayoutAlign="space-evenly left">
+      <button
+        class="download-button"
+        *ngFor="let torrent of torrents"
+        (click)="onDownloadClick(torrent, data)"
+        mat-raised-button
+      >
+        <mat-icon>cloud_download</mat-icon> {{ torrent.quality }}
+        {{ torrent.type }}
+      </button>
+    </div>
+  </div>
+</div>

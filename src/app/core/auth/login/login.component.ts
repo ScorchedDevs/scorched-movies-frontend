@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JWTToken, LoginInput } from '../../models/auth.model';
+import { ToastService } from '../../toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
     this.redirectHomeIfLoggendIn();
     this.route.queryParams.subscribe((params) => {
-      this.returnUrl = params['returnUrl'] || '/home';
+      this.returnUrl = params['returnUrl'] || '/list';
     });
   }
 
@@ -38,24 +40,32 @@ export class LoginComponent implements OnInit {
 
     const submitValues: LoginInput = this.loginForm.value;
 
+    console.log(submitValues);
+
     this.authService.login(submitValues).subscribe({
       complete: () => {
         const [returnRoute, returnParams] = this.returnUrl.split('?');
 
         const queryParams = this.convertQueryParamsStringToJSON(returnParams);
 
+        this.toastService.success('Login efetuado com sucesso');
+
         this.router.navigate([returnRoute], { queryParams });
       },
       error: (error) => {
-        console.log(error);
+        this.toastService.error(error.error.message);
       },
     });
+  }
+
+  onRegister() {
+    this.router.navigate(['register']);
   }
 
   private redirectHomeIfLoggendIn() {
     const currentUser: JWTToken | null = this.authService.currentUserValue;
     if (currentUser) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/list']);
     }
   }
 

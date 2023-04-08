@@ -1,26 +1,43 @@
-<div id="login-box" fxFlex="70" fxLayoutAlign="center center">
-  <form [formGroup]="loginForm">
-    <div id="login-form">
-      <mat-form-field>
-        <input matInput placeholder="User" formControlName="username" />
-      </mat-form-field>
+<div id="login-box">
+  <div fxFlex fxLayoutAlign="center center">
+    <mat-card fxFlex="30" fxLayoutAlign="center start"
+      ><form fxLayout="column" [formGroup]="loginForm">
+        <div id="login-form" fxFlex="100" fxLayout="row wrap">
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="User" formControlName="username" />
+          </mat-form-field>
 
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Password"
-          formControlName="password"
-          type="password"
-        />
-      </mat-form-field>
-    </div>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="!loginForm.valid"
-      (click)="onSubmit()"
+          <mat-form-field fxFlex="100">
+            <input
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              type="password"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          [disabled]="!loginForm.valid"
+          (click)="onSubmit()"
+        >
+          Login
+        </button>
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          (click)="onRegister()"
+        >
+          Register
+        </button>
+        <div id="forgot-container">
+          <span>Forgot your password? </span>
+          <a href="/sendRecover">click here</a>
+        </div>
+      </form></mat-card
     >
-      Entrar
-    </button>
-  </form>
+  </div>
 </div>

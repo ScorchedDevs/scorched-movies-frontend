@@ -1,0 +1,22 @@
+<div id="send-recover-container">
+  <div fxFlex fxLayoutAlign="center center">
+    <mat-card fxFlex="30" fxLayoutAlign="center start"
+      ><form fxLayout="column" [formGroup]="sendRecoverForm">
+        <div id="login-form" fxFlex="100" fxLayout="row wrap">
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Email" formControlName="email" />
+          </mat-form-field>
+        </div>
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          [disabled]="!sendRecoverForm.valid"
+          (click)="onSubmit()"
+        >
+          Send
+        </button>
+      </form></mat-card
+    >
+  </div>
+</div>

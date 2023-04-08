@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { SendRecoverComponent } from './send-recover.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('SendRecoverComponent', () => {
+  let component: SendRecoverComponent;
+  let fixture: ComponentFixture<SendRecoverComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ SendRecoverComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(SendRecoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
