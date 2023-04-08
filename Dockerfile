@@ -2,6 +2,7 @@
 FROM node:18 as node
 WORKDIR /app
 COPY package.json /app/
+COPY yarn.lock /app/
 RUN yarn
 COPY ./ /app/
 RUN yarn build --configuration production
