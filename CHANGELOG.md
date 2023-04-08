@@ -10,7 +10,7 @@
 
 ## Fixes
 
-- regenerating yarn.lock
+- increasing dockerfile yarn timeout
 
 ## Compatibility Breaker
 
