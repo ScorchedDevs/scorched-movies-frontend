@@ -10,7 +10,7 @@
 
 ## Fixes
 
-- small fix
+- small fixs
 
 ## Compatibility Breaker
 
