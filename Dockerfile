@@ -3,11 +3,10 @@ FROM node:18 as node
 WORKDIR /app
 COPY package.json /app/
 COPY yarn.lock /app/
-RUN yarn
-COPY ./ /app/
-
 RUN yarn config set network-timeout 300000
 
+RUN yarn
+COPY ./ /app/
 RUN yarn build --configuration production
 
 # Estagio 2 - Responsável por expor nossa aplicação
