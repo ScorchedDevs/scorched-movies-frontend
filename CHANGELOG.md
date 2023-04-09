@@ -2,16 +2,16 @@
 
 ## New Features
 
- - N/A
+- N/A
 
 ## Enhancements
 
- - N/A
+- N/A
 
 ## Fixes
 
- - N/A
+- Fixing docker build
 
 ## Compatibility Breaker
 
- - N/A
+- N/A
