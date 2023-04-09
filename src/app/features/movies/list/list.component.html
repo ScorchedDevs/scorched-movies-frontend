@@ -1,12 +1,14 @@
 <div fxLayout="column">
   <div id="search-container" fxFlex fxLayout="row">
-    <mat-icon id="icon" fxFlex="6">search</mat-icon>
+    <mat-icon id="icon" fxFlex="6" (click)="onSearchChange($event)"
+      >search</mat-icon
+    >
     <mat-form-field fxFlex="94" id="search-bar">
       <input
         type="tel"
         matInput
         placeholder="Search"
-        (input)="onSearchChange($event)"
+        (keyup.enter)="onSearchChange($event)"
       />
     </mat-form-field>
   </div>

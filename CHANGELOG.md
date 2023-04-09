@@ -2,15 +2,15 @@
 
 ## New Features
 
-- Adding spinner
+- N/A
 
 ## Enhancements
 
-- N/A
+- Adding new trackers and some small fixes
 
 ## Fixes
 
-- Some small fixes
+- N/A
 
 ## Compatibility Breaker
 

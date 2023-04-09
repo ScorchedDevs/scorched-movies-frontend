@@ -1,6 +1,7 @@
 .movie-container {
   margin: 0.5%;
   flex-grow: 1;
+  cursor: pointer;
 }
 #container {
   margin: auto;
@@ -20,6 +21,7 @@
   width: 80%;
   padding-left: 2%;
   padding-right: 2%;
+  cursor: pointer;
 }
 
 #search-container {
