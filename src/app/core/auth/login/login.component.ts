@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
 
     const submitValues: LoginInput = this.loginForm.value;
 
-    console.log(submitValues);
-
     this.authService.login(submitValues).subscribe({
       complete: () => {
         const [returnRoute, returnParams] = this.returnUrl.split('?');
