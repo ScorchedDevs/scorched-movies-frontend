@@ -19,7 +19,6 @@ import { MessageType } from '../models/download.type.model';
 })
 export class ToolbarComponent {
   userMovies!: any;
-  private userMoviesDiffer!: KeyValueDiffer<string, any>;
   download!: Download;
   badgeHidden = true;
   badgeNumber = 0;
@@ -27,28 +26,19 @@ export class ToolbarComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly moviesService: MoviesService,
-    private readonly downloadService: DownloadService,
-    private readonly differs: KeyValueDiffers
+    private readonly downloadService: DownloadService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.reloadDownloadingMovies();
-    this.userMoviesDiffer = this.differs.find(this.userMovies).create();
 
     this.downloadService.getNewMessage('message').subscribe((message: any) => {
       if (message.type === MessageType.DOWNLOAD_ADDED) {
-        this.reloadDownloadingMovies();
-        this.userMovies.forEach((movie: any) => {
-          if (movie.id === message.id) {
-            ++this.badgeNumber;
-            this.badgeHidden = false;
-          }
-        });
+        this.reloadDownloadingMovies(message);
       } else if (message.type === MessageType.DOWNLOAD_PROGRESS) {
         this.refreshDownloadProgress(message);
       } else if (message.type === MessageType.DOWNLOAD_FINISHED) {
-        ++this.badgeNumber;
-        this.badgeHidden = false;
+        this.reloadDownloadingMovies(message);
       }
     });
   }
@@ -57,16 +47,15 @@ export class ToolbarComponent {
     this.authService.logout();
   }
 
-  userMoviesChanged(changes: KeyValueChanges<string, any>) {
-    ++this.badgeNumber;
-    this.badgeHidden = false;
-  }
-
-  reloadDownloadingMovies() {
+  reloadDownloadingMovies(message?: any) {
     this.moviesService.getUserMovies().subscribe({
       next: (response) => {
         this.userMovies = response;
         this.userMovies.forEach((movie: any) => {
+          if (message && message.id == movie.id) {
+            ++this.badgeNumber;
+            this.badgeHidden = false;
+          }
           movie.downloaded = {
             downloadedAmount: 0,
             downloadSpeed: 0,

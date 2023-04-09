@@ -1,34 +1,24 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { LoaderService } from '../shared/loader/loader.service';
+import { Injectable } from '@angular/core';
+import { SpinnerHandlerService } from '../core/services/spinner-handler.service';
+import { Observable, finalize } from 'rxjs';
 
 @Injectable()
-export class LoadingInterceptor implements HttpInterceptor {
-  private totalRequests = 0;
-
-  constructor(private loadingService: LoaderService) {}
+export class SpinnerInterceptorService implements HttpInterceptor {
+  constructor(public spinnerHandler: SpinnerHandlerService) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log('caught');
-    this.totalRequests++;
-    this.loadingService.setLoading(true);
-    return next.handle(request).pipe(
-      finalize(() => {
-        this.totalRequests--;
-        if (this.totalRequests == 0) {
-          this.loadingService.setLoading(false);
-        }
-      })
-    );
+    this.spinnerHandler.handleRequest('plus');
+    return next.handle(request).pipe(finalize(this.finalize.bind(this)));
   }
+
+  finalize = (): void => this.spinnerHandler.handleRequest();
 }

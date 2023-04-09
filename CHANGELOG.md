@@ -2,7 +2,7 @@
 
 ## New Features
 
-- N/A
+- Adding spinner
 
 ## Enhancements
 
@@ -10,9 +10,7 @@
 
 ## Fixes
 
-- Fixing badges that would show up for everyone if someone started a new download
-- Fixing routes
-- Adding plex link after finished downloading
+- Some small fixes
 
 ## Compatibility Breaker
 
