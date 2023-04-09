@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  KeyValueChanges,
+  KeyValueDiffer,
+  KeyValueDiffers,
+} from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { MoviesService } from 'src/app/features/movies/movies.service';
 import { Socket } from 'ngx-socket-io';
@@ -14,6 +19,7 @@ import { MessageType } from '../models/download.type.model';
 })
 export class ToolbarComponent {
   userMovies!: any;
+  private userMoviesDiffer!: KeyValueDiffer<string, any>;
   download!: Download;
   badgeHidden = true;
   badgeNumber = 0;
@@ -21,19 +27,23 @@ export class ToolbarComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly moviesService: MoviesService,
-    private readonly downloadService: DownloadService
+    private readonly downloadService: DownloadService,
+    private readonly differs: KeyValueDiffers
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.reloadDownloadingMovies();
+    this.userMoviesDiffer = this.differs.find(this.userMovies).create();
 
     this.downloadService.getNewMessage('message').subscribe((message: any) => {
-      console.log(MessageType.DOWNLOAD_PROGRESS);
-      console.log(message.type === MessageType.DOWNLOAD_PROGRESS);
       if (message.type === MessageType.DOWNLOAD_ADDED) {
         this.reloadDownloadingMovies();
-        ++this.badgeNumber;
-        this.badgeHidden = false;
+        this.userMovies.forEach((movie: any) => {
+          if (movie.id === message.id) {
+            ++this.badgeNumber;
+            this.badgeHidden = false;
+          }
+        });
       } else if (message.type === MessageType.DOWNLOAD_PROGRESS) {
         this.refreshDownloadProgress(message);
       } else if (message.type === MessageType.DOWNLOAD_FINISHED) {
@@ -45,6 +55,11 @@ export class ToolbarComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  userMoviesChanged(changes: KeyValueChanges<string, any>) {
+    ++this.badgeNumber;
+    this.badgeHidden = false;
   }
 
   reloadDownloadingMovies() {

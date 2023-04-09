@@ -10,3 +10,6 @@ RUN yarn build --configuration production
 # Estagio 2 - Responsável por expor nossa aplicação
 FROM nginx
 COPY --from=node /app/dist/scorched-movies-frontend /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
