@@ -32,11 +32,17 @@
         </div>
 
         <mat-progress-bar
+          *ngIf="!movie.finishedDownloadingAt"
           class="progress-bar"
           mode="determinate"
           [value]="movie.downloaded.downloadedAmount"
         ></mat-progress-bar>
-        <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div
+          fxFlex
+          fxLayout="row"
+          fxLayoutAlign="space-evenly center"
+          *ngIf="!movie.finishedDownloadingAt"
+        >
           <span>{{ movie.downloaded.downloadedAmount.toFixed(1) }}%</span>
           <span
             >Speed:
@@ -44,6 +50,14 @@
             Mb/s</span
           >
         </div>
+        <a
+          mat-raised-button
+          color="primary"
+          class="plex-button"
+          *ngIf="movie.finishedDownloadingAt"
+          href="http://scorched-movies.ddns.net:32400/web/index.html#!/media/43cddf073fb7b10c5a1a0edf5d6914080e09c10d/com.plexapp.plugins.library?source=3"
+          >Watch on Plex</a
+        >
       </div>
     </div>
   </mat-menu>
