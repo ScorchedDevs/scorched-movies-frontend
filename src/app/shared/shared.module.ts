@@ -4,10 +4,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   exports: [
     CommonModule,
     FlexLayoutModule,

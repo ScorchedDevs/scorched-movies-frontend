@@ -2,16 +2,16 @@
 
 ## New Features
 
- - N/A
+- Adding spinner
 
 ## Enhancements
 
- - N/A
+- N/A
 
 ## Fixes
 
- - N/A
+- Some small fixes
 
 ## Compatibility Breaker
 
- - N/A
+- N/A

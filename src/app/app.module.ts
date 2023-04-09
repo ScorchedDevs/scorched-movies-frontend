@@ -16,13 +16,15 @@ import { SharedModule } from './shared/shared.module';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { SpinnerInterceptorService } from './interceptors/loading.interceptor';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 const config: SocketIoConfig = {
   url: environment.backendUrl,
   options: { transports: ['websocket'] },
 };
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent],
+  declarations: [AppComponent, ToolbarComponent, SpinnerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +37,11 @@ const config: SocketIoConfig = {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptorService,
+      multi: true,
+    },
     UserGuard,
   ],
   bootstrap: [AppComponent],
