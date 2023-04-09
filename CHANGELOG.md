@@ -2,16 +2,16 @@
 
 ## New Features
 
- - N/A
+- N/A
 
 ## Enhancements
 
- - N/A
+- Adding new trackers and some small fixes
 
 ## Fixes
 
- - N/A
+- N/A
 
 ## Compatibility Breaker
 
- - N/A
+- N/A
