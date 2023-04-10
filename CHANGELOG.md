@@ -6,11 +6,11 @@
 
 ## Enhancements
 
-- Adding new trackers and some small fixes
+- N/A
 
 ## Fixes
 
-- N/A
+- small fix on torrent download speed
 
 ## Compatibility Breaker
 

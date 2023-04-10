@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://scorched-movies.ddns.net:3000',
-  //backendUrl: 'http://localhost:3000',
+  //backendUrl: 'http://scorched-movies.ddns.net:3000',
+  backendUrl: 'http://localhost:3000',
 };
 
 /*
