@@ -2,16 +2,16 @@
 
 ## New Features
 
- - N/A
+- N/A
 
 ## Enhancements
 
- - N/A
+- N/A
 
 ## Fixes
 
- - N/A
+- small fix on torrent download speed
 
 ## Compatibility Breaker
 
- - N/A
+- N/A

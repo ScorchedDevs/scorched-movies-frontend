@@ -33,7 +33,7 @@ export class ToolbarComponent {
     this.reloadDownloadingMovies();
 
     this.downloadService.getNewMessage('message').subscribe((message: any) => {
-      if (message.type === MessageType.DOWNLOAD_ADDED) {
+      if (message.type === MessageType.DOWNLOAD_STARTED) {
         this.reloadDownloadingMovies(message);
       } else if (message.type === MessageType.DOWNLOAD_PROGRESS) {
         this.refreshDownloadProgress(message);
