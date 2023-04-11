@@ -20,7 +20,6 @@ export class MovieDialogComponent {
   torrents!: any[];
 
   async ngOnInit(): Promise<void> {
-    console.log(this.data);
     this.image = this.data.large_cover_image;
     this.title = this.data.title;
     this.description = this.data.summary;

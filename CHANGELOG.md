@@ -10,7 +10,7 @@
 
 ## Fixes
 
-- small fix on torrent download speed
+- some fixes
 
 ## Compatibility Breaker
 
