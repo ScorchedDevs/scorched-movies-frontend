@@ -40,7 +40,6 @@ export class RecoverPasswordComponent {
     const submitValues: RecoverInput = this.recoverForm.value;
 
     if (submitValues.password != submitValues.passwordConfirmation) {
-      console.log('nope');
       return;
     }
 
