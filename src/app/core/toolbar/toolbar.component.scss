@@ -10,7 +10,9 @@
 
 .movie-image {
   width: 100px;
-  padding: 5%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  padding-right: 5%;
 }
 
 .progress-bar {
@@ -20,5 +22,13 @@
 
 .plex-button {
   width: 90%;
+  margin: auto;
+}
+
+.movie-column {
+  padding: 3%;
+}
+
+.delete-button {
   margin: auto;
 }

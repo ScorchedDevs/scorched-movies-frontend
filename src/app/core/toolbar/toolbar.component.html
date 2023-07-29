@@ -21,14 +21,27 @@
   </button>
   <mat-menu class="downloadMenu" #downloadMenu="matMenu">
     <div fxFlex fxLayout="column">
-      <div *ngFor="let movie of this.userMovies" fxLayout="column">
+      <div
+        *ngFor="let movie of this.userMovies"
+        fxLayout="column"
+        class="movie-column"
+      >
         <div fxFlex fxLayout="row">
-          <img class="movie-image" [src]="movie.image" />
+          <img class="movie-image" alt="movie image" [src]="movie.image" />
           <div class="movie-data-container" fxFlex fxLayout="column">
             <span>{{ movie.name }}</span>
             <br />
             <span>{{ movie.quality }}</span>
           </div>
+          <button
+            mat-icon-button
+            mat-raised-button
+            color="primary"
+            class="delete-button"
+            (click)="deleteMovie(movie)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
 
         <mat-progress-bar

@@ -11,6 +11,9 @@ import { Download } from '../models/download.model';
 import { map } from 'rxjs';
 import { DownloadService } from './download.service';
 import { MessageType } from '../models/download.type.model';
+import { ToolbarService } from '../toolbar.service';
+import { ToastService } from '../toast/toast.service';
+import { MessageOutput } from '../models/message.model';
 
 @Component({
   selector: 'app-toolbar',
@@ -26,19 +29,21 @@ export class ToolbarComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly moviesService: MoviesService,
-    private readonly downloadService: DownloadService
+    private readonly downloadService: DownloadService,
+    private readonly toolbarService: ToolbarService,
+    private readonly toastService: ToastService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.reloadDownloadingMovies();
+    this.refreshDownloadingMovies();
 
     this.downloadService.getNewMessage('message').subscribe((message: any) => {
       if (message.type === MessageType.DOWNLOAD_STARTED) {
-        this.reloadDownloadingMovies(message);
+        this.refreshDownloadingMovies(message);
       } else if (message.type === MessageType.DOWNLOAD_PROGRESS) {
         this.refreshDownloadProgress(message);
       } else if (message.type === MessageType.DOWNLOAD_FINISHED) {
-        this.reloadDownloadingMovies(message);
+        this.refreshDownloadingMovies(message);
       }
     });
   }
@@ -47,7 +52,7 @@ export class ToolbarComponent {
     this.authService.logout();
   }
 
-  reloadDownloadingMovies(message?: any) {
+  refreshDownloadingMovies(message?: any) {
     this.moviesService.getUserMovies().subscribe({
       next: (response) => {
         this.userMovies = response;
@@ -82,5 +87,18 @@ export class ToolbarComponent {
   clickOnDownloadManager() {
     this.badgeHidden = true;
     this.badgeNumber = 0;
+  }
+
+  deleteMovie(movie: any) {
+    delete movie.downloaded;
+    this.toolbarService.deleteMovie(movie).subscribe({
+      complete: () => {
+        this.toastService.success(`Movie ${movie.name} successfully deleted`);
+      },
+      error: (error: Error) => {
+        console.log(error);
+      },
+    });
+    this.refreshDownloadingMovies();
   }
 }

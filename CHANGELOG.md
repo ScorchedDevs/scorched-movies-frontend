@@ -6,11 +6,11 @@
 
 ## Enhancements
 
-- N/A
+- Adding delete button and delete functionality
 
 ## Fixes
 
-- some fixes
+- N/A
 
 ## Compatibility Breaker
 
