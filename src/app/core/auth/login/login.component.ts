@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
         const queryParams = this.convertQueryParamsStringToJSON(returnParams);
 
-        this.toastService.success('Login efetuado com sucesso');
+        this.toastService.success('Successfully logged in!');
 
         this.router.navigate([returnRoute], { queryParams });
       },

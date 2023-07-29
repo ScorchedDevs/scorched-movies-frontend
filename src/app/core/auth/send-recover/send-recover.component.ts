@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegisterInput } from '../../models/auth.model';
-import { subscribeOn } from 'rxjs';
 import { ToastService } from '../../toast/toast.service';
 
 @Component({
@@ -47,9 +45,5 @@ export class SendRecoverComponent implements OnInit {
         this.toastService.error(error.error.message);
       },
     });
-  }
-
-  private convertQueryParamsStringToJSON(queryParamnsString: string): Object {
-    return Object.fromEntries(new URLSearchParams(queryParamnsString));
   }
 }
