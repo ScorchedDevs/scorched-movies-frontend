@@ -2,16 +2,16 @@
 
 ## New Features
 
-- N/A
+ - N/A
 
 ## Enhancements
 
-- Adding delete button and delete functionality
+ - N/A
 
 ## Fixes
 
-- N/A
+ - Reuploading to docker
 
 ## Compatibility Breaker
 
-- N/A
+ - N/A
